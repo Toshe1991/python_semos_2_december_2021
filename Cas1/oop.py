@@ -1,5 +1,8 @@
 class Company:
     def hire(self, employee, position, salary):
+        if employee.company:
+            raise Exception(f"{employee} is already working in {employee.company}")
+
         employee.position = position
         employee.salary = salary
         employee.company = self
@@ -7,6 +10,9 @@ class Company:
         self.employee_list.append(employee)
 
     def fire(self, employee):
+        if (not employee.company) or (employee.company.company_id != self.company_id):
+            raise Exception(f"{employee} can't be fired, not working in {self.name}")
+
         employee.position = None
         employee.salary = None
         employee.company = None
@@ -14,8 +20,12 @@ class Company:
         self.employee_list.remove(employee)
 
     def get_salary_costs(self):
-        # Needs to calculate all the salaries in all the employees in the company in total
-        pass
+        total_salary_costs = 0
+
+        for employee in self.employee_list:
+            total_salary_costs += employee.salary
+
+        return total_salary_costs
 
     def __str__(self):
         return self.name
@@ -74,10 +84,15 @@ jovan.company = None
 
 semos.hire(kristijan, "Python Developer", 40000)
 semos.hire(marija, "HR", 30000)
+# semos.hire(marija, "HR", 30000)
 
-print(semos.employee_list)
-print(seavus.employee_list)
-# print(semos.employee_list)
+# semos.fire(jovan)
+
+# print(semos.get_salary_costs())
+#
+# semos.fire(marija)
+#
+# print(semos.get_salary_costs())
 #
 # for employee in semos.employee_list:
 #     print(employee)
