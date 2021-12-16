@@ -66,12 +66,12 @@
 # PASS BY REFERENCE
 # SIDE EFFECT -> callables who mutate out of local scope objects
 
-def test(num):
-    # global num  # -> syntaxic sugar
-    num += 10
-    print(f"From test: {num}")
-
-num = 50
-test(num)
-
-print(num)
+# def test(num):
+#     # global num  # -> syntaxic sugar
+#     num += 10
+#     print(f"From test: {num}")
+#
+# num = 50
+# test(num)
+#
+# print(num)
