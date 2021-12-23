@@ -3,14 +3,30 @@ from .company import Company
 
 class Employee:
 
-    def __init__(self, first_name, last_name, email):
+    def __init__(self, first_name, last_name, email, embg):
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
         self.salary = None
-        self.position = None
         self.company = None
+        self.embg = self.validate_embg(embg)
         self.offers = dict()
+
+    def deserialize_object(self, salary, position, company, offers):
+        self.salary = salary
+        self.position = position
+        self.company = company
+        self.offers = offers
+
+    def serialize(self):
+        return self.__dict__  # dunder dict method
+
+    @staticmethod
+    def validate_embg(embg):
+        if len(str(embg)) != 13:
+            raise Exception(f"Invalid EMBG: {embg}. Must be 13 characters")
+
+        return embg
 
     def full_name(self):
         return f"{self.first_name} {self.last_name}"
@@ -40,7 +56,6 @@ class Employee:
 
         self.company = offer.company
         self.salary = offer.salary
-        self.position = offer.position
         self.company.employee_list.append(self)
 
         print(f"{self} accepted the offer from company {self.company}")
@@ -54,4 +69,22 @@ class Employee:
         self.company.employee_list.remove(self)
         self.company = None
         self.salary = None
-        self.position = None
+
+    def do_work(self):
+        print(f"I am working, doing {self.asset}")
+        self.company.assets.append(self.asset)
+
+
+class Developer(Employee):
+    position = "Developer"
+    asset = "develop software"
+
+
+class Accountant(Employee):
+    position = "Accountant"
+    asset = "calculation"
+
+    # Partial override of method
+    def do_work(self):
+        print("Preparing documents, will take around 1 month...")
+        super().do_work()

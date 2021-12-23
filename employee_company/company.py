@@ -9,14 +9,29 @@ class Company:
         self.address = address
         self.company_id = company_id
         self.employee_list = []
+        self.assets = []
 
-    def make_offer(self, employee, salary, position):
-        offer = Offer(self, employee, salary, position)
+    def serialize(self):
+        return self.__dict__  # dunder dict method
+
+    @property  # Getter
+    def company_id(self):
+        return self.__company_id
+
+    @company_id.setter
+    def company_id(self, value):
+        if not isinstance(value, str) or len(value) != 4 or not value.isdigit():
+            raise Exception(f"Value for company id is not valid. Value provided: {value}")
+
+        self.__company_id = value
+
+    def make_offer(self, employee, salary):
+        offer = Offer(self, employee, salary)
         offer.send_offer()
         print(offer)
 
     def fire(self, employee):
-        if (not employee.company) or (employee.company.company_id != self.company_id):
+        if (not employee.company) or (employee.company.company_id != self.__company_id):
             raise Exception(f"{employee} can't be fired, not working in {self.name}")
 
         employee.position = None
