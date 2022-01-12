@@ -4,7 +4,7 @@ from requests import RequestException
 import datetime
 
 
-# API_KEY =
+API_KEY = "037280345fcab30b7f0fbf6675ee5cc0"
 
 
 class Genres:
