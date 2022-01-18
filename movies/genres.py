@@ -46,7 +46,23 @@ class Genres:
 
         raise Exception(f"Genre with id {genre_id}, doesn't exist.")
 
-    def genre_id_by_name(self, genre_name):
+    def get_genre_name_binary(self, genre_id):
+        low = 0
+        high = len(self.genres) - 1
+
+        while low <= high:
+            middle = low + (high-low) // 2
+
+            if self.genres[middle]["id"] == genre_id:
+                return self.genres[middle]["name"]
+            elif self.genres[middle]["id"] < genre_id:
+                low = middle + 1
+            else:
+                high = middle - 1
+
+        raise Exception(f"Genre with id {genre_id}, doesn't exist.")
+
+    def get_genre_id_by_name(self, genre_name):
         """
         Return the id of the genre based on the genre name.
         :param genre_name: name of the genre to find

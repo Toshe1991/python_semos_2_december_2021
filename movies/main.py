@@ -11,11 +11,18 @@ API_KEY = "037280345fcab30b7f0fbf6675ee5cc0"
 genres = Genres(api_key=API_KEY)
 
 movies_list = MoviesList(api_key=API_KEY, genres=genres)
-total_movies = movies_list.search_movie_by_name("Harry Potter")
-print(f"Total movies found, for title Harry Potter: {total_movies}")
 
-movies_list.get_movies(10, 50)
+# Searching By Name
+# total_movies = movies_list.search_movie_by_name("Harry Potter")
+# print(f"Total movies found, for title Harry Potter: {total_movies}")
+#
+# movies_list.get_movies(10, 50)
 
+# Searching by year and genre
+total_found = movies_list.search_movie_by_genre_and_year(genre_name="Comedy")
+print(f"Total movies found for genre Comedy: {total_found}")
+
+movies_list.get_movies(20, 0)
 """
 {'page': 1, 'results': 
 [
