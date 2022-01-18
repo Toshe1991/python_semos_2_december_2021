@@ -6,7 +6,7 @@
 from genres import Genres
 from movies_list import MoviesList
 
-API_KEY = "037280345fcab30b7f0fbf6675ee5cc0"
+API_KEY =
 
 genres = Genres(api_key=API_KEY)
 
