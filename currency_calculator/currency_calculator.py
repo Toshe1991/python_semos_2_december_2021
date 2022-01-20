@@ -1,7 +1,7 @@
 import requests
 
 
-ACCESS_KEY = 
+ACCESS_KEY =
 
 
 class ExchangeRateApi:
